@@ -137,14 +137,7 @@ return [
     */
 
     'custom' => [
-        'required_title' => [
-            'required' => 'titleは、40文字以下で指定してください。',
-            'max' => 'titleは、40文字以下で指定してください.',
-        ],
-        'required_content' => [
-            'required' => 'contentは、200文字以下で指定してください。',
-            'max' => 'contentは、200文字以下で指定してください.',
-        ],
+        
     ],
 
     /*
