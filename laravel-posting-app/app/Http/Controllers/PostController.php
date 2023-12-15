@@ -50,8 +50,8 @@ class PostController extends Controller
             'content' => 'required|max:200',
         ]);
 
-        $post->required_title = $request->input('title');
-        $post->required_content = $request->input('content');
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
         $post->save();
 
         return redirect()->route('posts.show', $post)->with('flash_message', '投稿を編集しました。');
