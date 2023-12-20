@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// ルーティングを設定するコントローラを宣言する
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\GoalController;
+use App\Http\Controllers\TodoController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,29 +16,14 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', [PostController::class, 'index']);
+Route::get('/', [GoalController::class, 'index'])->middleware('auth');
 
-/*
-// 投稿の一覧ページ
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Auth::routes();
 
-// 投稿の作成ページ
-Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
- 
-// 投稿の作成機能
-Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// 投稿の詳細ページ
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::resource('goals', GoalController::class)->only(['index', 'store', 'update', 'destroy'])->middleware('auth');
 
-// 投稿の更新ページ
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
- 
-// 投稿の更新機能
-Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+Route::resource('goals.todos', TodoController::class)->only(['store', 'update', 'destroy'])->middleware('auth');
 
-// 投稿の削除機能
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-*/
-
-Route::resource('posts', PostController::class);
+Route::resource('tags', TagController::class)->only(['store', 'update', 'destroy'])->middleware('auth');
