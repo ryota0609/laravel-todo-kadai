@@ -80,11 +80,11 @@
                                      <div class="d-flex justify-content-between align-items-center mb-2">
                                      <h5 class="card-title ms-1 mb-0">
                                              @if ($todo->done)
-                                                 <s>{{ $todo->content }}</s>
+                                                 <s>{{ $todo->content }}</s>     
                                              @else
                                                  {{ $todo->content }}
                                              @endif
-                                         </h5> 
+                                     </h5>
                                          <div class="dropdown">
                                              <a href="#" class="dropdown-toggle px-1 fs-5 fw-bold link-dark text-decoration-none menu-icon" id="dropdownTodoMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">︙</a>
                                              <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownTodoMenuLink">                                                                                                                                                                                       
@@ -93,6 +93,7 @@
                                                          @csrf
                                                          @method('patch')
                                                          <input type="hidden" name="content" value="{{ $todo->content }}">
+                                                         <input type="hidden" name="description" value="{{ $todo->description }}">
                                                          @if ($todo->done)  
                                                              <input type="hidden" name="done" value="false">
                                                              <button type="submit" class="dropdown-item btn btn-link">未完了</button>
@@ -107,7 +108,15 @@
                                                  <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteTodoModal{{ $todo->id }}">削除</a></li>  
                                              </ul>
                                          </div>
-                                     </div>   
+                                     </div>
+                                     <h6 class="card-title ms-0 mb-1">
+                                     <div class="d-flex flex-wrap mx-1 mb-1">
+                                             @if ($todo->done)
+                                                 <s>{{ $todo->description }}</s>     
+                                             @else
+                                                 {{ $todo->description }}
+                                             @endif
+                                     </h6>   
                                      <h6 class="card-subtitle ms-1 mb-1 text-muted">{{ $todo->created_at }}</h6>                                                               
                                      <div class="d-flex flex-wrap mx-1 mb-1">
                                          @foreach ($todo->tags()->orderBy('id', 'asc')->get() as $tag)                                    
